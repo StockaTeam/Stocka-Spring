@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import br.com.stocka.stockaspring.model.UserModel;
 
 @Repository
-public interface UserRepository extends JpaRepository<Long, UserModel> {
+public interface UserRepository extends JpaRepository<UserModel, Long> {
 
     Optional<UserModel> findByUsername(String username);
 
