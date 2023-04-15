@@ -1,11 +1,14 @@
 package br.com.stocka.stockaspring.controller;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +35,7 @@ public class UserController {
         this.userServiceImpl = userServiceImpl;
     }
 
-    // @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity<Object> saveUser(@RequestBody @Valid UserDto userDto){
         if(userServiceImpl.existsByUsername(userDto.getUsername())){
@@ -41,17 +44,17 @@ public class UserController {
         
         var userModel = new UserModel();
         BeanUtils.copyProperties(userDto, userModel);
-        // userModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
+        userModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
         return ResponseEntity.status(HttpStatus.CREATED).body(userServiceImpl.save(userModel));
     }
 
-    // @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping
     public ResponseEntity<List<UserModel>> getAllUsers(){
         return ResponseEntity.status(HttpStatus.OK).body(userServiceImpl.findAll());
     }
 
-    // @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOneUser(@PathVariable(value = "id") Long id){
         Optional<UserModel> userModelOptional = userServiceImpl.findById(id);
@@ -61,7 +64,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userModelOptional.get());
     }
 
-    // @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteUser(@PathVariable(value = "id") Long id){
         Optional<UserModel> userModelOptional = userServiceImpl.findById(id);
@@ -72,7 +75,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body("User deleted successfully.");
     }
 
-    // @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateUser(@PathVariable(value = "id") Long id,
                                                     @RequestBody @Valid UserDto userDto){
