@@ -1,6 +1,7 @@
 package br.com.stocka.stockaspring.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -29,6 +30,9 @@ public class UserModel implements UserDetails, Serializable {
     private String username;
     @Column(nullable = false)
     private String password;
+    @Column(nullable = true)
+    private LocalDateTime registrationDate;
+
     @ManyToMany
     @JoinTable(name = "TB_USERS_ROLES",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -97,5 +101,13 @@ public class UserModel implements UserDetails, Serializable {
 
     public void setRoles(List<RoleModel> roles) {
         this.roles = roles;
+    }
+
+    public LocalDateTime getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(LocalDateTime localDateTime) {
+        this.registrationDate = localDateTime;
     }
 }
