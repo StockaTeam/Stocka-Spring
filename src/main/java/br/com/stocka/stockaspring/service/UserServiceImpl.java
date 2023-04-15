@@ -3,6 +3,7 @@ package br.com.stocka.stockaspring.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.stocka.stockaspring.model.UserModel;
@@ -20,8 +21,9 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public Long save(UserModel UserModel) {
-        UserModel userCreated = userRepository.save(UserModel);        
+    public Long save(UserModel userModel) {
+        userModel.setPassword( new BCryptPasswordEncoder().encode(userModel.getPassword()) );
+        UserModel userCreated = userRepository.save(userModel);        
         return userCreated.getUserId();
     }
 
