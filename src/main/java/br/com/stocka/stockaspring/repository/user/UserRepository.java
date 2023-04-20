@@ -1,4 +1,4 @@
-package br.com.stocka.stockaspring.repository;
+package br.com.stocka.stockaspring.repository.user;
 
 import java.util.Optional;
 
@@ -10,7 +10,7 @@ import br.com.stocka.stockaspring.model.UserModel;
 @Repository
 public interface UserRepository extends JpaRepository<UserModel, Long> {
 
-    Optional<UserModel> findByUsername(String username);
+    Optional<UserModel> findByUsername(String username);    
 
     Boolean existsByUsername(String username);
     

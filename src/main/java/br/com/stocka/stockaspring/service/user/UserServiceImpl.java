@@ -1,4 +1,4 @@
-package br.com.stocka.stockaspring.service;
+package br.com.stocka.stockaspring.service.user;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,7 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.stocka.stockaspring.model.UserModel;
-import br.com.stocka.stockaspring.repository.UserRepository;
+import br.com.stocka.stockaspring.repository.user.UserRepository;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -51,6 +51,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<UserModel> findByUsername(String username) {
         return userRepository.findByUsername(username);
-    }
-    
+    }    
+
 }
