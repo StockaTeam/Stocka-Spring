@@ -19,7 +19,7 @@ public class StockModel {
     @Column(nullable = false, unique = true)
     private String description;
     @Column(nullable = false)
-    private String user;
+    private UserModel user;
     @Column(nullable = false)    
     private LocalDateTime registrationDate;
     
@@ -35,10 +35,10 @@ public class StockModel {
     public void setDescription(String description) {
         this.description = description;
     }
-    public String getUser() {
+    public UserModel getUser() {
         return user;
     }
-    public void setUser(String user) {
+    public void setUser(UserModel user) {
         this.user = user;
     }
     public LocalDateTime getRegistrationDate() {

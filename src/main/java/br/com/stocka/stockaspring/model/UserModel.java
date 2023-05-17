@@ -29,7 +29,7 @@ public class UserModel implements UserDetails {
     private String username;
     @Column(nullable = false)
     private String password;
-    @Column(nullable = true)
+    @Column(nullable = false)
     private LocalDateTime registrationDate;
 
     @ManyToMany
