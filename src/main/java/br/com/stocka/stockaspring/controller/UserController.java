@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.stocka.stockaspring.dto.UserDto;
 import br.com.stocka.stockaspring.model.UserModel;
-import br.com.stocka.stockaspring.service.UserServiceImpl;
+import br.com.stocka.stockaspring.service.user.UserServiceImpl;
 import jakarta.validation.Valid;
 
 @RestController
@@ -36,7 +36,6 @@ public class UserController {
         this.userServiceImpl = userServiceImpl;
     }
 
-    // @PreAuthorize("hasAnyRole('ROLE_USER')")
     @PostMapping("/login")
     public ResponseEntity<Object> loginUser(@RequestBody @Valid UserDto userDto){  
         
@@ -60,7 +59,6 @@ public class UserController {
             
     }
 
-    // @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity<Object> saveUser(@RequestBody @Valid UserDto userDto){
         if(userServiceImpl.existsByUsername(userDto.getUsername())){
@@ -73,13 +71,11 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userServiceImpl.save(userModel));
     }
 
-    // @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping
     public ResponseEntity<List<UserModel>> getAllUsers(){
         return ResponseEntity.status(HttpStatus.OK).body(userServiceImpl.findAll());
     }
 
-    // @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOneUser(@PathVariable(value = "id") Long id){
         Optional<UserModel> userModelOptional = userServiceImpl.findById(id);
@@ -89,7 +85,6 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userModelOptional.get());
     }
 
-    // @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteUser(@PathVariable(value = "id") Long id){
         Optional<UserModel> userModelOptional = userServiceImpl.findById(id);
@@ -100,7 +95,6 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body("User deleted successfully.");
     }
 
-    // @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateUser(@PathVariable(value = "id") Long id,
                                                     @RequestBody @Valid UserDto userDto){
@@ -111,7 +105,6 @@ public class UserController {
         var userModel = new UserModel();
         BeanUtils.copyProperties(userDto, userModel);
         userModel.setUserId(userModelOptional.get().getUserId());
-        // userModel.setRegistrationDate(userModelOptional.get().getRegistrationDate());
         return ResponseEntity.status(HttpStatus.OK).body(userServiceImpl.save(userModel));
     }
 }

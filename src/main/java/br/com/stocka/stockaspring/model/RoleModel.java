@@ -1,7 +1,5 @@
 package br.com.stocka.stockaspring.model;
 
-import java.io.Serializable;
-
 import org.springframework.security.core.GrantedAuthority;
 
 import br.com.stocka.stockaspring.enums.RoleName;
@@ -16,7 +14,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "TB_ROLE")
-public class RoleModel implements GrantedAuthority, Serializable {
+public class RoleModel implements GrantedAuthority {
     private static final long serialVersionUID = 1L;
 
     @Id
