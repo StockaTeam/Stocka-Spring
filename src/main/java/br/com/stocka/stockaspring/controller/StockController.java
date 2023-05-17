@@ -9,9 +9,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,7 +34,6 @@ public class StockController {
         this.stockServiceImpl = stockServiceImpl;
     }    
 
-    // @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity<Object> saveStock(@RequestBody @Valid StockDto stockDto){
         if(stockServiceImpl.existsByDescription(stockDto.getDescription())){
@@ -45,46 +46,41 @@ public class StockController {
         return ResponseEntity.status(HttpStatus.CREATED).body(stockServiceImpl.save(stockModel));
     }
 
-    // @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping
     public ResponseEntity<List<StockModel>> getAllStocks(){
         return ResponseEntity.status(HttpStatus.OK).body(stockServiceImpl.findAll());
     }
 
-    // @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOneStock(@PathVariable(value = "id") Long id){
-        Optional<StockModel> userModelOptional = stockServiceImpl.findById(id);
-        if (!userModelOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
+        Optional<StockModel> stockModelOptional = stockServiceImpl.findById(id);
+        if (!stockModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Stock not found.");
         }
-        return ResponseEntity.status(HttpStatus.OK).body(userModelOptional.get());
+        return ResponseEntity.status(HttpStatus.OK).body(stockModelOptional.get());
     }
 
-    // @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteUser(@PathVariable(value = "id") Long id){
-        Optional<UserModel> userModelOptional = stockServiceImpl.findById(id);
-        if (!userModelOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
+    public ResponseEntity<Object> deleteStock(@PathVariable(value = "id") Long id){
+        Optional<StockModel> stockModelOptional = stockServiceImpl.findById(id);
+        if (!stockModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Stock not found.");
         }
-        stockServiceImpl.delete(userModelOptional.get());
-        return ResponseEntity.status(HttpStatus.OK).body("User deleted successfully.");
+        stockServiceImpl.delete(stockModelOptional.get());
+        return ResponseEntity.status(HttpStatus.OK).body("Stock deleted successfully.");
     }
 
-    // @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateUser(@PathVariable(value = "id") Long id,
-                                                    @RequestBody @Valid UserDto userDto){
-        Optional<UserModel> userModelOptional = stockServiceImpl.findById(id);
-        if (!userModelOptional.isPresent()) {
+    public ResponseEntity<Object> updateStock(@PathVariable(value = "id") Long id,
+                                                    @RequestBody @Valid StockModel stockDto){
+        Optional<StockModel> stockModelOptional = stockServiceImpl.findById(id);
+        if (!stockModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
         }
-        var userModel = new UserModel();
-        BeanUtils.copyProperties(userDto, userModel);
-        userModel.setUserId(userModelOptional.get().getUserId());
-        // userModel.setRegistrationDate(userModelOptional.get().getRegistrationDate());
-        return ResponseEntity.status(HttpStatus.OK).body(stockServiceImpl.save(userModel));
+        var stockModel = new StockModel();
+        BeanUtils.copyProperties(stockDto, stockModel);
+        stockModel.setStockId(stockModelOptional.get().getStockId());        
+        return ResponseEntity.status(HttpStatus.OK).body(stockServiceImpl.save(stockModel));
     }
 
 }
