@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import br.com.stocka.stockaspring.model.StockModel;
-import br.com.stocka.stockaspring.repository.stock.StockRepository;
+import br.com.stocka.stockaspring.repository.StockRepository;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -47,8 +47,8 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    public Optional<StockModel> findByDescription(String Description) {
-        return stockRepository.findByDescription(Description);
+    public Optional<StockModel> findByDescription(String description) {
+        return stockRepository.findByDescription(description);
     } 
     
 }

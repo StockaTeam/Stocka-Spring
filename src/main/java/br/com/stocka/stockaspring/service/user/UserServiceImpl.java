@@ -7,7 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.stocka.stockaspring.model.UserModel;
-import br.com.stocka.stockaspring.repository.user.UserRepository;
+import br.com.stocka.stockaspring.repository.UserRepository;
 import jakarta.transaction.Transactional;
 
 @Service
