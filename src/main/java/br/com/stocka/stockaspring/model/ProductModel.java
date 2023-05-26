@@ -3,6 +3,8 @@ package br.com.stocka.stockaspring.model;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,11 +25,14 @@ public class ProductModel {
     private String type;
     @Column(nullable = false)
     private BigDecimal price;
+    @Column(nullable = true)
+    private BigDecimal competition_price;
     @Column(nullable = false)
     private Integer quantityInStock;
     @Column(nullable = true)
     private String barCode;
     @Column(nullable = false)    
+    @CreationTimestamp
     private LocalDateTime registrationDate;
 
     public Long getProductId() {

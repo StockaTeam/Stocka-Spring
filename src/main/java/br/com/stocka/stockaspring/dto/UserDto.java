@@ -13,8 +13,7 @@ public class UserDto {
     @NotBlank(message = "password must contain a valid value")
     @Size(min = 6, max = 20, message = "password must to be between 6 and 20 characters")
     private String password;
-    @NotBlank(message = "registration date must contain a valid value")
-    @Size(min = 8, max = 10, message = "registration date must to be between 3 and 10 characters")
+    
     private LocalDateTime registrationDate;
     
     public LocalDateTime getRegistrationDate() {

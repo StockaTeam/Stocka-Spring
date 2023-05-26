@@ -2,6 +2,8 @@ package br.com.stocka.stockaspring.model;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,6 +23,7 @@ public class StockModel {
     @Column(nullable = false)
     private UserModel user;
     @Column(nullable = false)    
+    @CreationTimestamp
     private LocalDateTime registrationDate;
     
     public Long getStockId() {
