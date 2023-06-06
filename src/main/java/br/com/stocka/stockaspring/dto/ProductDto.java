@@ -21,9 +21,9 @@ public class ProductDto {
     private BigDecimal competition_price;
        
     private String barCode;
-    @NotBlank(message = "registration date must contain a valid value")
-    @Size(min = 8, max = 10, message = "registration date must to be between 3 and 10 characters")
-    private LocalDateTime registrationDate;
+    // @NotBlank(message = "registration date must contain a valid value")
+    // @Size(min = 8, max = 10, message = "registration date must to be between 3 and 10 characters")
+    // private LocalDateTime registrationDate;
     
     public String getName() {
         return name;
@@ -61,12 +61,12 @@ public class ProductDto {
     public void setBarCode(String barCode) {
         this.barCode = barCode;
     }
-    public LocalDateTime getRegistrationDate() {
-        return registrationDate;
-    }
-    public void setRegistrationDate(LocalDateTime registrationDate) {
-        this.registrationDate = registrationDate;
-    }
+    // public LocalDateTime getRegistrationDate() {
+    //     return registrationDate;
+    // }
+    // public void setRegistrationDate(LocalDateTime registrationDate) {
+    //     this.registrationDate = registrationDate;
+    // }
     
     
     

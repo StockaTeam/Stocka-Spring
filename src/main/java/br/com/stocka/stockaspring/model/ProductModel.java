@@ -35,6 +35,7 @@ public class ProductModel {
     @CreationTimestamp
     private LocalDateTime registrationDate;
 
+    
     public Long getProductId() {
         return productId;
     }
@@ -59,11 +60,23 @@ public class ProductModel {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+    public BigDecimal getCompetition_price() {
+        return competition_price;
+    }
+    public void setCompetition_price(BigDecimal competition_price) {
+        this.competition_price = competition_price;
+    }
     public Integer getQuantityInStock() {
         return quantityInStock;
     }
     public void setQuantityInStock(Integer quantityInStock) {
         this.quantityInStock = quantityInStock;
+    }
+    public String getBarCode() {
+        return barCode;
+    }
+    public void setBarCode(String barCode) {
+        this.barCode = barCode;
     }
     public LocalDateTime getRegistrationDate() {
         return registrationDate;
@@ -71,5 +84,7 @@ public class ProductModel {
     public void setRegistrationDate(LocalDateTime registrationDate) {
         this.registrationDate = registrationDate;
     }
+
+    
     
 }

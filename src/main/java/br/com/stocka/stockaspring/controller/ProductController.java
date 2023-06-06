@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.stocka.stockaspring.dto.ProductDto;
-import br.com.stocka.stockaspring.dto.StockDto;
 import br.com.stocka.stockaspring.model.ProductModel;
 import br.com.stocka.stockaspring.service.product.ProductServiceImpl;
 import jakarta.validation.Valid;
@@ -57,6 +56,15 @@ public class ProductController {
         Optional<ProductModel> ProductModelOptional = productServiceImpl.findById(id);
         if (!ProductModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(ProductModelOptional.get());
+    }
+
+    @GetMapping("/barCode/{barCode}")
+    public ResponseEntity<Object> getOneProductByBarCode(@PathVariable(value = "barCode") String barCode){
+        Optional<ProductModel> ProductModelOptional = productServiceImpl.findByBarCode(barCode);
+        if (!ProductModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("BarCode not found.");
         }
         return ResponseEntity.status(HttpStatus.OK).body(ProductModelOptional.get());
     }
