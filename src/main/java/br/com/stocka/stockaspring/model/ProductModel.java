@@ -71,5 +71,18 @@ public class ProductModel {
     public void setRegistrationDate(LocalDateTime registrationDate) {
         this.registrationDate = registrationDate;
     }
+	public BigDecimal getCompetition_price() {
+		return competition_price;
+	}
+	public void setCompetition_price(BigDecimal competition_price) {
+		this.competition_price = competition_price;
+	}
+	public String getBarCode() {
+		return barCode;
+	}
+	public void setBarCode(String barCode) {
+		this.barCode = barCode;
+	}
+    
     
 }
