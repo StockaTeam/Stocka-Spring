@@ -9,7 +9,7 @@ public class StockDto {
 
     @NotBlank(message = "username must contain a valid value")
     @Size(min = 3, max = 40, message = "username must to be between 3 and 40 characters")
-    private String user;
+    private String userModel;
     @NotBlank(message = "description must contain a valid value")
     @Size(min = 3, max = 40, message = "description must to be between 3 and 40 characters")
     private String description;
@@ -18,10 +18,10 @@ public class StockDto {
     private LocalDateTime registrationDate;
     
     public String getUser() {
-        return user;
+        return userModel;
     }
     public void setUser(String user) {
-        this.user = user;
+        this.userModel = user;
     }
     public String getDescription() {
         return description;
