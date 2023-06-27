@@ -60,15 +60,24 @@ public class ProductController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(ProductModelOptional.get());
     }
-    
+
     @GetMapping("/barCode/{barCode}")
-    public ResponseEntity<Object> getOneProduct(@PathVariable(value = "barCode") String barCode){
+    public ResponseEntity<Object> getOneProductByBarCode(@PathVariable(value = "barCode") String barCode){
         Optional<ProductModel> ProductModelOptional = productServiceImpl.findByBarCode(barCode);
         if (!ProductModelOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("BarCode not found.");
         }
         return ResponseEntity.status(HttpStatus.OK).body(ProductModelOptional.get());
     }
+    
+    // @GetMapping("/barCode/{barCode}")
+    // public ResponseEntity<Object> getOneProduct(@PathVariable(value = "barCode") String barCode){
+    //     Optional<ProductModel> ProductModelOptional = productServiceImpl.findByBarCode(barCode);
+    //     if (!ProductModelOptional.isPresent()) {
+    //         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
+    //     }
+    //     return ResponseEntity.status(HttpStatus.OK).body(ProductModelOptional.get());
+    // }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteProduct(@PathVariable(value = "id") Long id){
