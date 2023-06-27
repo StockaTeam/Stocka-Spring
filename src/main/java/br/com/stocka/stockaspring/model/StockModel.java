@@ -10,7 +10,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "TB_STOCK")
 public class StockModel {
@@ -21,36 +23,9 @@ public class StockModel {
     @Column(nullable = false, unique = true)
     private String description;
     @Column(nullable = false)
-    private UserModel user;
+    private UserModel userModel;
     @Column(nullable = false)    
     @CreationTimestamp
-    private LocalDateTime registrationDate;
-    
-    public Long getStockId() {
-        return stockId;
-    }
-    public void setStockId(Long stockId) {
-        this.stockId = stockId;
-    }
-    public String getDescription() {
-        return description;
-    }
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    public UserModel getUser() {
-        return user;
-    }
-    public void setUser(UserModel user) {
-        this.user = user;
-    }
-    public LocalDateTime getRegistrationDate() {
-        return registrationDate;
-    }
-    public void setRegistrationDate(LocalDateTime registrationDate) {
-        this.registrationDate = registrationDate;
-    }
-
-    
+    private LocalDateTime registrationDate; 
     
 }

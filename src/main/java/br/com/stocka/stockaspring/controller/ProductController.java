@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.stocka.stockaspring.dto.ProductDto;
-import br.com.stocka.stockaspring.dto.StockDto;
 import br.com.stocka.stockaspring.model.ProductModel;
 import br.com.stocka.stockaspring.service.product.ProductServiceImpl;
 import jakarta.validation.Valid;
