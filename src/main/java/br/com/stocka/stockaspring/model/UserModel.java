@@ -26,10 +26,13 @@ public class UserModel implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
+    
     @Column(nullable = false, unique = true)
     private String username;
+    
     @Column(nullable = false)
     private String password;
+    
     @Column(nullable = true)
     @CreationTimestamp
     private LocalDateTime registrationDate;

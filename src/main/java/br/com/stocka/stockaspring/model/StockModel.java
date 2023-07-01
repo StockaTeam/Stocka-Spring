@@ -20,10 +20,13 @@ public class StockModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long stockId;
+    
     @Column(nullable = false, unique = true)
     private String description;
+    
     @Column(nullable = false)
     private UserModel userModel;
+    
     @Column(nullable = false)    
     @CreationTimestamp
     private LocalDateTime registrationDate; 
