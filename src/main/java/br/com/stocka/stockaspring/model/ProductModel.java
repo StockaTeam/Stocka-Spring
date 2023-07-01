@@ -23,13 +23,13 @@ public class ProductModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long productId;
     
-    @Column(nullable = false, unique = true, name = "name")
+    @Column(nullable = true, unique = true, name = "name")
     private String name;
     
     @Column(nullable = true, name = "type")
     private String type;
     
-    @Column(nullable = false, name = "price")
+    @Column(nullable = true, name = "price")
     private BigDecimal price;
     
     @Column(nullable = true, name = "cost")
@@ -38,16 +38,16 @@ public class ProductModel {
     @Column(nullable = true, name = "competition_price")
     private BigDecimal competitionPrice;
     
-    @Column(nullable = false, name = "quantity_in_stock")
+    @Column(nullable = true, name = "quantity_in_stock")
     private Integer quantityInStock;
     
-    @Column(nullable = false, name = "bar_code")
+    @Column(nullable = true, name = "bar_code")
     private String barCode;
     
-    @Column(nullable = false, name = "expiration_date")
+    @Column(nullable = true, name = "expiration_date")
     private LocalDate expirationDate;
 
-    @Column(nullable = false, name = "physical_position")
+    @Column(nullable = true, name = "physical_position")
     private String physicalPosition;
     
     @Column(nullable = true, name = "registration_date")

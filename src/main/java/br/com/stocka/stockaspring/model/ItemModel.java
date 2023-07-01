@@ -21,7 +21,7 @@ public class ItemModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long itemId;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinTable(name = "TB_STOCK",
             joinColumns = @JoinColumn(name = "item_id"),
             inverseJoinColumns = @JoinColumn(name = "stock_id"))
@@ -31,6 +31,6 @@ public class ItemModel {
     @JoinTable(name = "TB_PRODUCT",
             joinColumns = @JoinColumn(name = "item_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<ProductModel> products;
+    private List<ProductModel> products;*/
     
 }

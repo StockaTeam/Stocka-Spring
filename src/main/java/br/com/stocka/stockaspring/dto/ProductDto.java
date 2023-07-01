@@ -27,7 +27,8 @@ public class ProductDto {
     @Min(value = 0, message = "Quantity in stock must be greater than or equal to 0")
     private Integer quantityInStock;
 
-    private BigDecimal competition_price;
+    @Min(value = 0, message = "Competition Price must be greater than or equal to 0")
+    private BigDecimal competitionPrice;
 
     @NotBlank(message = "Bar code must contain a valid value")
     private String barCode;
