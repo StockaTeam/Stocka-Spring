@@ -77,7 +77,7 @@ public class StockaSpringApplication implements CommandLineRunner {
 		product.setType(type);
 		product.setPrice(new BigDecimal(price));
 		product.setCost(new BigDecimal(cost));
-		product.setCompetition_price(new BigDecimal(competitionPrice));
+		product.setCompetitionPrice(new BigDecimal(competitionPrice));
 		product.setQuantityInStock(quantityInStock);
 		product.setBarCode(barCode);
 		product.setPhysicalPosition(physicalPosition);

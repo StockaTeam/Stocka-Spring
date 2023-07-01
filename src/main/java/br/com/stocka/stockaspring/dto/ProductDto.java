@@ -2,94 +2,39 @@ package br.com.stocka.stockaspring.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
 
+@Data
 public class ProductDto {
 
-    @NotBlank(message = "username must contain a valid value")
-    @Size(min = 3, max = 40, message = "username must to be between 3 and 40 characters")
+    @NotBlank(message = "Name must contain a valid value")
+    @Size(min = 3, max = 40, message = "Name must be between 3 and 40 characters")
     private String name;
 
+    @NotNull(message = "Type in stock must contain a valid value")
     private String type;
 
+    @NotNull(message = "Price must contain a valid value")
+    @Min(value = 0, message = "Price must be greater than or equal to 0")
     private BigDecimal price;
 
+    @NotNull(message = "Quantity in stock must contain a valid value")
+    @Min(value = 0, message = "Quantity in stock must be greater than or equal to 0")
     private Integer quantityInStock;
 
     private BigDecimal competition_price;
 
+    @NotBlank(message = "Bar code must contain a valid value")
     private String barCode;
-    @NotBlank(message = "registration date must contain a valid value")
-    @Size(min = 8, max = 10, message = "registration date must to be between 3 and 10 characters")
 
+    @NotNull(message = "Expiration date must contain a valid value")
     private LocalDate expirationDate;
 
+    @NotNull(message = "Physical postion must contain a valid value")
     private String physicalPosition;
-
-    public String getPhysicalPosition() {
-        return physicalPosition;
-    }
-
-    public void setPhysicalPosition(String physicalPosition) {
-        this.physicalPosition = physicalPosition;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public BigDecimal getCompetition_price() {
-        return competition_price;
-    }
-
-    public void setCompetition_price(BigDecimal competition_price) {
-        this.competition_price = competition_price;
-    }
-
-    public Integer getQuantityInStock() {
-        return quantityInStock;
-    }
-
-    public void setQuantityInStock(Integer quantityInStock) {
-        this.quantityInStock = quantityInStock;
-    }
-
-    public String getBarCode() {
-        return barCode;
-    }
-
-    public void setBarCode(String barCode) {
-        this.barCode = barCode;
-    }
-
-    public LocalDate getExpirationDate() {
-        return expirationDate;
-    }
-
-    public void setExpirationDate(LocalDate expirationDate) {
-        this.expirationDate = expirationDate;
-    }
 }

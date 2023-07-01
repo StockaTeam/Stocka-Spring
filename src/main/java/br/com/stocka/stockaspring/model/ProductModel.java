@@ -23,34 +23,34 @@ public class ProductModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long productId;
     
-    @Column(nullable = true, unique = true, name = "name")
+    @Column(nullable = false, unique = true, name = "name")
     private String name;
     
     @Column(nullable = true, name = "type")
     private String type;
     
-    @Column(nullable = true, name = "price")
+    @Column(nullable = false, name = "price")
     private BigDecimal price;
     
     @Column(nullable = true, name = "cost")
     private BigDecimal cost;
     
     @Column(nullable = true, name = "competition_price")
-    private BigDecimal competition_price;
+    private BigDecimal competitionPrice;
     
-    @Column(nullable = true, name = "quantityInStock")
+    @Column(nullable = false, name = "quantity_in_stock")
     private Integer quantityInStock;
     
-    @Column(nullable = true, name = "barCode")
+    @Column(nullable = false, name = "bar_code")
     private String barCode;
     
-    @Column(nullable = true, name = "expirationDate")
+    @Column(nullable = false, name = "expiration_date")
     private LocalDate expirationDate;
 
-    @Column(nullable = true, name = "physicalPosition")
+    @Column(nullable = false, name = "physical_position")
     private String physicalPosition;
     
-    @Column(nullable = true, name = "registrationDate")
+    @Column(nullable = true, name = "registration_date")
     @CreationTimestamp
     private LocalDateTime registrationDate;
 }

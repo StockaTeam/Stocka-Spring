@@ -75,7 +75,7 @@ public class StockController {
                                                     @RequestBody @Valid StockModel stockDto){
         Optional<StockModel> stockModelOptional = stockServiceImpl.findById(id);
         if (!stockModelOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Stock not found.");
         }
         var stockModel = new StockModel();
         BeanUtils.copyProperties(stockDto, stockModel);
