@@ -1,14 +1,18 @@
 package br.com.stocka.stockaspring.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -21,14 +25,19 @@ public class StockModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long stockId;
     
-    @Column(nullable = false, unique = true, name = "description")
+    @Column(nullable = true, unique = true, name = "description")
     private String description;
     
-    @Column(nullable = false, name = "user_model")
-    private UserModel userModel;
+    /*@OneToOne
+    @JoinColumn(name = "user_model_id")
+    private UserModel userModel;*/
     
-    @Column(nullable = false, name = "registration_date")    
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "stock_id")
+    private List<ProductModel> items;
+
+    @Column(nullable = true, name = "registration_date")    
     @CreationTimestamp
     private LocalDateTime registrationDate; 
-    
 }
+

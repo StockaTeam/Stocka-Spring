@@ -5,12 +5,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -22,6 +25,10 @@ public class ProductModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long productId;
+
+    @ManyToOne
+    @JoinColumn(name = "stock_model_id")
+    private StockModel stockModel;
     
     @Column(nullable = true, unique = true, name = "name")
     private String name;
@@ -45,6 +52,7 @@ public class ProductModel {
     private String barCode;
     
     @Column(nullable = true, name = "expiration_date")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate expirationDate;
 
     @Column(nullable = true, name = "physical_position")

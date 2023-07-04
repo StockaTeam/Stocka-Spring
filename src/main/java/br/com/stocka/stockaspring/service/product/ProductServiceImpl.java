@@ -1,10 +1,13 @@
 package br.com.stocka.stockaspring.service.product;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import br.com.stocka.stockaspring.dto.ProductDto;
 import br.com.stocka.stockaspring.model.ProductModel;
 import br.com.stocka.stockaspring.repository.ProductRepository;
 import jakarta.transaction.Transactional;
@@ -21,10 +24,24 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     @Override
     public Long save(ProductModel ProductModel) {
-        ProductModel stockCreated = productRepository.save(ProductModel);        
-        return stockCreated.getProductId();
+        ProductModel productCreated = productRepository.save(ProductModel);
+        return productCreated.getProductId();
     }
-    
+
+    @Transactional
+    @Override
+    public List<ProductModel> saveAll(List<ProductDto> products) {
+        List<ProductModel> productModels = new ArrayList<>();
+
+        for (ProductDto productDto : products) {
+            ProductModel productModel = new ProductModel();
+            BeanUtils.copyProperties(productDto, productModel);
+            productModels.add(productModel);
+        }
+
+        return productRepository.saveAll(productModels);
+    }
+
     @Override
     public List<ProductModel> findAll() {
         return productRepository.findAll();
@@ -60,5 +77,5 @@ public class ProductServiceImpl implements ProductService {
     public Optional<ProductModel> findByBarCode(String barCode) {
         return productRepository.findByBarCode(barCode);
     }
-    
+
 }
