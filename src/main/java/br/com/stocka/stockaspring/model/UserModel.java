@@ -8,6 +8,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,6 +36,7 @@ public class UserModel implements UserDetails {
     private String password;
     
     @Column(nullable = true, name = "registration_date")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @CreationTimestamp
     private LocalDateTime registrationDate;
 

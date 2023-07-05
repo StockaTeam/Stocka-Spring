@@ -23,6 +23,10 @@ public class ProductDto {
     @Min(value = 0, message = "Price must be greater than or equal to 0")
     private BigDecimal price;
 
+    @NotNull(message = "Cost must contain a valid value")
+    @Min(value = 0, message = "Cost must be greater than or equal to 0")
+    private BigDecimal cost;
+
     @NotNull(message = "Quantity in stock must contain a valid value")
     @Min(value = 0, message = "Quantity in stock must be greater than or equal to 0")
     private Integer quantityInStock;

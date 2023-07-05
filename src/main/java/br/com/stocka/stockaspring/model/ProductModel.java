@@ -5,7 +5,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -52,13 +53,14 @@ public class ProductModel {
     private String barCode;
     
     @Column(nullable = true, name = "expiration_date")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate expirationDate;
 
     @Column(nullable = true, name = "physical_position")
     private String physicalPosition;
     
     @Column(nullable = true, name = "registration_date")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @CreationTimestamp
     private LocalDateTime registrationDate;
 }

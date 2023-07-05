@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,7 +38,8 @@ public class StockModel {
     @JoinColumn(name = "stock_id")
     private List<ProductModel> items;
 
-    @Column(nullable = true, name = "registration_date")    
+    @Column(nullable = true, name = "registration_date") 
+    @JsonFormat(pattern = "dd/MM/yyyy")   
     @CreationTimestamp
     private LocalDateTime registrationDate; 
 }
