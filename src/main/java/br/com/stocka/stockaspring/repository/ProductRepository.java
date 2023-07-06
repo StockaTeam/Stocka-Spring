@@ -1,5 +1,7 @@
 package br.com.stocka.stockaspring.repository;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,10 +14,5 @@ public interface ProductRepository extends JpaRepository<ProductModel, Long> {
     Optional<ProductModel> findByBarCode(String barCode);
     Boolean existsByBarCode(String barCode);
 
-    /*
-     * @Query("SELECT p FROM ProductModel p WHERE p.expirationDate = :expirationDate"
-     * )
-     * List<ProductModel> findByExpirationDate(LocalDate expirationDate, LocalDate
-     * firstDate, LocalDate lastDate);
-     */
+    List<ProductModel> findByExpirationDateLessThanEqual(LocalDate fromDate);
 }

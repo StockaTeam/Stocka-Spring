@@ -30,13 +30,9 @@ public class StockModel {
     @Column(nullable = true, unique = true, name = "description")
     private String description;
     
-    /*@OneToOne
-    @JoinColumn(name = "user_model_id")
-    private UserModel userModel;*/
-    
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "stock_id")
-    private List<ProductModel> items;
+    private List<ProductModel> listProducts;
 
     @Column(nullable = true, name = "registration_date") 
     @JsonFormat(pattern = "dd/MM/yyyy")   

@@ -1,6 +1,7 @@
 package br.com.stocka.stockaspring.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
@@ -40,6 +41,7 @@ public class ProductController {
         this.productServiceImpl = productServiceImpl;
     }
 
+    // localhost:8080/products/upload
     @PostMapping("/upload")
     public ResponseEntity<Object> uploadProducts(@RequestParam("file") MultipartFile file) {
         // Verificar se o arquivo é um arquivo CSV
@@ -60,6 +62,7 @@ public class ProductController {
         }
     }
 
+    // localhost:8080/products
     @PostMapping
     public ResponseEntity<Object> saveProduct(@RequestBody @Valid ProductDto productDto) {
         if (productServiceImpl.existsByName(productDto.getName())) {
@@ -73,11 +76,19 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(productServiceImpl.save(productModel));
     }
 
+    // localhost:8080/products
     @GetMapping
     public ResponseEntity<List<ProductModel>> getAllProducts() {
         return ResponseEntity.status(HttpStatus.OK).body(productServiceImpl.findAll());
     }
 
+    // localhost:8080/products/expiringDate/2023-06-30
+    @GetMapping("/expiringDate/{finishDate}")
+    public ResponseEntity<List<ProductModel>> getAllProductsExpiringDate(@PathVariable(value = "finishDate") LocalDate finishDate) {
+        return ResponseEntity.status(HttpStatus.OK).body(productServiceImpl.findByExpirationDateLessThanEqual(finishDate));
+    }
+
+    // localhost:8080/products/1
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOneProduct(@PathVariable(value = "id") Long id) {
         Optional<ProductModel> ProductModelOptional = productServiceImpl.findById(id);
@@ -87,6 +98,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(ProductModelOptional.get());
     }
 
+    // localhost:8080/products/barCode/{barCode}
     @GetMapping("/barCode/{barCode}")
     public ResponseEntity<Object> getOneProductByBarCode(@PathVariable(value = "barCode") String barCode) {
         Optional<ProductModel> ProductModelOptional = productServiceImpl.findByBarCode(barCode);
@@ -96,18 +108,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(ProductModelOptional.get());
     }
 
-    // @GetMapping("/barCode/{barCode}")
-    // public ResponseEntity<Object> getOneProduct(@PathVariable(value = "barCode")
-    // String barCode){
-    // Optional<ProductModel> ProductModelOptional =
-    // productServiceImpl.findByBarCode(barCode);
-    // if (!ProductModelOptional.isPresent()) {
-    // return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not
-    // found.");
-    // }
-    // return ResponseEntity.status(HttpStatus.OK).body(ProductModelOptional.get());
-    // }
-
+    // localhost:8080/products/1
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteProduct(@PathVariable(value = "id") Long id) {
         Optional<ProductModel> ProductModelOptional = productServiceImpl.findById(id);
@@ -118,6 +119,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body("Product deleted successfully.");
     }
 
+    // localhost:8080/products/1
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateProduct(@PathVariable(value = "id") Long id,
             @RequestBody @Valid ProductModel productDto) {
@@ -131,6 +133,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(productServiceImpl.save(ProductModel));
     }
 
+    // localhost:8080/products/1/competitionprice
     @PatchMapping("/{id}/competitionprice")
     public ResponseEntity<Object> updateCompetitionPriceOfProduct(@PathVariable(value = "id") Long id,
             @RequestBody @Valid CompetitionPriceProductDto competitionPriceProductDto) {

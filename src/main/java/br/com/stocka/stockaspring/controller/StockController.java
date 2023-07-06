@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.stocka.stockaspring.dto.AddProductInStock;
 import br.com.stocka.stockaspring.dto.StockDto;
 import br.com.stocka.stockaspring.model.ProductModel;
 import br.com.stocka.stockaspring.model.StockModel;
@@ -51,28 +52,32 @@ public class StockController {
         return ResponseEntity.status(HttpStatus.CREATED).body(stockServiceImpl.save(stockModel));
     }
 
-    @PostMapping("/{stockId}/items")
-    public ResponseEntity<Object> saveItem(@PathVariable(value = "stockId") Long stockId, @RequestBody Long productId) {
+    @PostMapping("/{stockId}/addProduct")
+    public ResponseEntity<Object> saveItem(@PathVariable(value = "stockId") Long stockId, @RequestBody AddProductInStock addProductInStock) {
         Optional<StockModel> stockModelOptional = stockServiceImpl.findById(stockId);
         if (!stockModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Stock not found.");
         }
 
-        Optional<ProductModel> productModelOptional = productServiceImpl.findById(productId);
+        Optional<ProductModel> productModelOptional = productServiceImpl.findById(addProductInStock.getProductId());
         if (!productModelOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product with ID " + productId + " not found.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product with ID " + addProductInStock.getProductId() + " not found.");
         }
 
-        // StockModel stockModel = stockModelOptional.get();
-        // List<ProductModel> items = stockModel.getItems();
+        StockModel stock = stockModelOptional.get();
+        ProductModel product = productModelOptional.get();
 
-        // Criar um novo objeto ProductModel com base no ID do produto
-        /*ProductModel productModel = productModelOptional.get();
-        productModel.getItems().pus;
+        var ProductModel = new ProductModel();
+        BeanUtils.copyProperties(product, ProductModel);
+        ProductModel.setProductId(productModelOptional.get().getProductId());
+        productServiceImpl.save(ProductModel);
 
+        /*var stockModel = new StockModel();
+        BeanUtils.copyProperties(stock, stockModel);
+        stockModel.setStockId(stockModelOptional.get().getStockId());
         stockServiceImpl.save(stockModel);*/
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("Item saved successfully.");
+        return ResponseEntity.ok("Product added to stock successfully.");
     }
 
     @GetMapping

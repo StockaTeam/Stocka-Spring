@@ -1,5 +1,6 @@
 package br.com.stocka.stockaspring.service.product;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -76,6 +77,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Optional<ProductModel> findByBarCode(String barCode) {
         return productRepository.findByBarCode(barCode);
+    }
+
+    @Override
+    public List<ProductModel> findByExpirationDateLessThanEqual(LocalDate fromDate) {
+        return productRepository.findByExpirationDateLessThanEqual(fromDate);
     }
 
 }

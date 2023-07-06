@@ -1,5 +1,6 @@
 package br.com.stocka.stockaspring.service.product;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,4 +17,6 @@ public interface ProductService {
     public List<ProductModel> findAll();
     public Optional<ProductModel> findById(Long id);    
     public void delete(ProductModel productModel);  
+
+    public List<ProductModel> findByExpirationDateLessThanEqual(LocalDate fromDate);
 }
